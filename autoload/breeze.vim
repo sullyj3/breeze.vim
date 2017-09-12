@@ -20,13 +20,15 @@ let s:regex_for = {
 " Core functions
 " ============================================================================
 
-fu breeze#Jump(target, backward)
+fu breeze#Jump(target, backward, inner)
     let repeat = !a:backward ? 0 : s:inside(a:target)
     if search(s:regex_for[a:target], a:backward ? "bW" : "W")
         if repeat
             cal search(s:regex_for[a:target], a:backward ? "bW" : "W")
         end
-        norm! l
+        if a:inner
+            norm! l
+        end
     endif
 endfu
 
